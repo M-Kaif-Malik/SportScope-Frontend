@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MaterialIcon } from '../ui/MaterialIcon';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [expandedMenu, setExpandedMenu] = useState('Cricket');
+    const [isDark, setIsDark] = useState(false);
 
-    const [expandedMenu, setExpandedMenu] = useState('Cricket'); // Default to Cricket open
+    useEffect(() => {
+        // Check local storage or system preference on mount
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+            setIsDark(true);
+        }
+    }, []);
+
+    const toggleDarkMode = () => {
+        if (isDark) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            setIsDark(false);
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            setIsDark(true);
+        }
+    };
 
     const toggleMenu = (item) => {
         setExpandedMenu(expandedMenu === item ? null : item);
@@ -34,10 +57,10 @@ export const Header = () => {
                     </nav>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <MaterialIcon name="dark_mode" />
+                    <button onClick={toggleDarkMode} className="p-2 rounded-full hover:bg-[var(--color-surface-variant)] transition-colors border-none bg-transparent cursor-pointer text-[var(--color-on-surface)] flex items-center justify-center">
+                        <MaterialIcon name={isDark ? "light_mode" : "dark_mode"} />
                     </button>
-                    <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
+                    <button className="md:hidden p-2 border-none bg-transparent cursor-pointer text-[var(--color-on-surface)] flex items-center justify-center" onClick={() => setMenuOpen(!menuOpen)}>
                         <MaterialIcon name={menuOpen ? "close" : "menu"} />
                     </button>
                 </div>
