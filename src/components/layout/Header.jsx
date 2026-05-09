@@ -5,6 +5,12 @@ import { MaterialIcon } from '../ui/MaterialIcon';
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
+    const [expandedMenu, setExpandedMenu] = useState('Cricket'); // Default to Cricket open
+
+    const toggleMenu = (item) => {
+        setExpandedMenu(expandedMenu === item ? null : item);
+    };
+
     return (
         <header className="fixed top-0 w-full z-50 bg-[var(--color-surface)] border-b border-[var(--color-outline-variant)]/30 shadow-sm h-16">
             <div className="flex items-center justify-between w-full px-4 md:px-12 max-w-[1280px] mx-auto h-full">
@@ -32,20 +38,37 @@ export const Header = () => {
                         <MaterialIcon name="dark_mode" />
                     </button>
                     <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
-                        <MaterialIcon name="menu" />
+                        <MaterialIcon name={menuOpen ? "close" : "menu"} />
                     </button>
                 </div>
             </div>
             {menuOpen && (
                 <div className="md:hidden px-4 pb-4 bg-[var(--color-surface)] border-t border-[var(--color-outline-variant)]">
                     {["Cricket", "Football", "Basketball"].map((item) => (
-                        <a
-                            key={item}
-                            href="#"
-                            className="block py-2 text-[12px] font-semibold tracking-[0.08em] uppercase text-[var(--color-on-surface-variant)] no-underline font-inter"
-                        >
-                            {item}
-                        </a>
+                        <div key={item} className="border-b border-[var(--color-outline-variant)]/20 last:border-0">
+                            <button
+                                onClick={() => toggleMenu(item)}
+                                className="w-full flex items-center justify-between py-4 text-[14px] font-bold tracking-[0.05em] uppercase text-[var(--color-on-surface)] bg-transparent border-none cursor-pointer"
+                            >
+                                {item}
+                                <MaterialIcon name={expandedMenu === item ? "expand_less" : "expand_more"} />
+                            </button>
+                            {expandedMenu === item && (
+                                <div className="pb-4 pl-4 flex flex-col gap-4 border-l-2 border-[var(--color-secondary)] ml-2">
+                                    {item === "Cricket" ? (
+                                        <>
+                                            <Link to="/" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Home</Link>
+                                            <Link to="/live" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Live Matches</Link>
+                                            <Link to="/series" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Series</Link>
+                                            <Link to="/previous-matches" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Previous Matches</Link>
+                                            <Link to="/players" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Players</Link>
+                                        </>
+                                    ) : (
+                                        <span className="text-[12px] font-medium text-[var(--color-outline)] italic">Coming Soon...</span>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </div>
             )}
