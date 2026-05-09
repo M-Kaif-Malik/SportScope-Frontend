@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // 1. Import your images from assets
 import img1 from '../../assets/images/ashes.webp';
@@ -11,6 +12,7 @@ const images = [img1, img2, img3, img4];
 export const HeroSection = () => {
     const [index, setIndex] = useState(0);
     const [hover, setHover] = useState(false);
+    const navigate = useNavigate();
 
     // Auto slide every 5 seconds
     useEffect(() => {
@@ -66,7 +68,10 @@ export const HeroSection = () => {
                         Track live matches, browse series, explore players, and stay connected with the latest cricket action worldwide.
                     </p>
 
-                    <button className="bg-[var(--color-secondary-fixed)] text-[var(--color-on-secondary-fixed)] px-8 py-3 rounded-lg font-inter text-[12px] font-semibold tracking-[0.08em] uppercase border-none cursor-pointer hover:bg-[var(--color-secondary-fixed-dim)] transition-colors">
+                    <button
+                        onClick={() => navigate('/live')}
+                        className="bg-[var(--color-secondary-fixed)] text-[var(--color-on-secondary-fixed)] px-8 py-3 rounded-lg font-inter text-[12px] font-semibold tracking-[0.08em] uppercase border-none cursor-pointer hover:bg-[var(--color-secondary-fixed-dim)] transition-colors"
+                    >
                         View Live Matches
                     </button>
                 </div>
