@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MaterialIcon } from '../ui/MaterialIcon';
 
+import logoLight from '../../assets/images/logo.png';
+import logoDark from '../../assets/images/logo-b2.png';
+
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [expandedMenu, setExpandedMenu] = useState('Cricket');
@@ -11,7 +14,7 @@ export const Header = () => {
         // Check local storage or system preference on mount
         const storedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
+
         if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
             document.documentElement.classList.add('dark');
             setIsDark(true);
@@ -39,11 +42,19 @@ export const Header = () => {
             <div className="flex items-center justify-between w-full px-4 md:px-12 max-w-[1280px] mx-auto h-full">
                 <div className="flex items-center gap-12">
                     <Link to="/" className="flex items-center gap-2 cursor-pointer no-underline">
-                        <div className="w-8 h-8 rounded bg-[var(--color-primary)] flex items-center justify-center text-[var(--color-on-primary)]">
-                            <MaterialIcon name="sports_cricket" />
-                        </div>
-                        <span className="font-bold text-[20px] tracking-tight text-[var(--color-primary)] font-manrope">SportsScope</span>
+
+                        { }
+                        <img
+                            src={isDark ? logoDark : logoLight}
+                            alt="SportsScope Logo"
+                            className="w-8 h-8 object-contain"
+                        />
+
+                        <span className="font-bold text-[20px] tracking-tight text-[var(--color-primary)] font-manrope">
+                            SportsScope
+                        </span>
                     </Link>
+
                     <nav className="hidden md:flex items-center gap-6">
                         {["Cricket", "Football", "Basketball"].map((item, i) => (
                             <a
@@ -56,15 +67,24 @@ export const Header = () => {
                         ))}
                     </nav>
                 </div>
+
                 <div className="flex items-center gap-4">
-                    <button onClick={toggleDarkMode} className="p-2 rounded-full hover:bg-[var(--color-surface-variant)] transition-colors border-none bg-transparent cursor-pointer text-[var(--color-on-surface)] flex items-center justify-center">
+                    <button
+                        onClick={toggleDarkMode}
+                        className="p-2 rounded-full hover:bg-[var(--color-surface-variant)] transition-colors border-none bg-transparent cursor-pointer text-[var(--color-on-surface)] flex items-center justify-center"
+                    >
                         <MaterialIcon name={isDark ? "light_mode" : "dark_mode"} />
                     </button>
-                    <button className="md:hidden p-2 border-none bg-transparent cursor-pointer text-[var(--color-on-surface)] flex items-center justify-center" onClick={() => setMenuOpen(!menuOpen)}>
+
+                    <button
+                        className="md:hidden p-2 border-none bg-transparent cursor-pointer text-[var(--color-on-surface)] flex items-center justify-center"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
                         <MaterialIcon name={menuOpen ? "close" : "menu"} />
                     </button>
                 </div>
             </div>
+
             {menuOpen && (
                 <div className="md:hidden px-4 pb-4 bg-[var(--color-surface)] border-t border-[var(--color-outline-variant)]">
                     {["Cricket", "Football", "Basketball"].map((item) => (
@@ -76,6 +96,7 @@ export const Header = () => {
                                 {item}
                                 <MaterialIcon name={expandedMenu === item ? "expand_less" : "expand_more"} />
                             </button>
+
                             {expandedMenu === item && (
                                 <div className="pb-4 pl-4 flex flex-col gap-4 border-l-2 border-[var(--color-secondary)] ml-2">
                                     {item === "Cricket" ? (
