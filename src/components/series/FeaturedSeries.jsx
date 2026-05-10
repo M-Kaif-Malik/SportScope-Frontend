@@ -1,6 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from "../../config/axios";
+
+
+
 import { SectionHeader } from '../ui/SectionHeader';
+
 import { SeriesCard } from './SeriesCard';
 
 export const FeaturedSeries = () => {
@@ -12,7 +16,8 @@ export const FeaturedSeries = () => {
         const fetchFeaturedSeries = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5000/api/series/upcoming?format=all&status=all`);
+                const response = await api.get(`/api/series/upcoming?format=all&status=all`);
+
                 
                 const topSeries = response.data.series.slice(0, 5);
                 
@@ -20,7 +25,8 @@ export const FeaturedSeries = () => {
                     topSeries.map(async (s) => {
                         let teamImages = null;
                         try {
-                            const detailsRes = await axios.get(`http://localhost:5000/api/series/${s.seriesId}`);
+                            const detailsRes = await api.get(`/api/series/${s.seriesId}`);
+
                             if (detailsRes.data.series && detailsRes.data.series.matchList) {
                                 const firstMatchWithTeams = detailsRes.data.series.matchList.find(m => m.teamInfo && m.teamInfo.length >= 2);
                                 if (firstMatchWithTeams) {

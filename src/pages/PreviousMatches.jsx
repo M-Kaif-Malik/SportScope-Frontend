@@ -3,6 +3,7 @@ import { Header } from '../components/layout/Header';
 import { SecondaryNavbar } from '../components/layout/SecondaryNavbar';
 import { Footer } from '../components/layout/Footer';
 import { MaterialIcon } from '../components/ui/MaterialIcon';
+import API_BASE_URL from "../config/api";
 
 export default function PreviousMatches() {
     const [matches, setMatches] = useState([]);
@@ -19,7 +20,7 @@ export default function PreviousMatches() {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/api/matches/saved')
+        fetch(`${API_BASE_URL}/api/matches/saved`)
             .then(res => res.json())
             .then(data => {
                 setMatches(data.matches || []);

@@ -4,6 +4,7 @@ import { Header } from '../components/layout/Header';
 import { SecondaryNavbar } from '../components/layout/SecondaryNavbar';
 import { Footer } from '../components/layout/Footer';
 import { MaterialIcon } from '../components/ui/MaterialIcon';
+import API_BASE_URL from "../config/api";
 
 export default function LiveMatches() {
     const [liveMatches, setLiveMatches] = useState([]);
@@ -46,8 +47,8 @@ export default function LiveMatches() {
             setError(null);
             try {
                 const [liveRes, upcomingRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/matches/live'),
-                    fetch('http://localhost:5000/api/matches/upcoming')
+                    fetch(`${API_BASE_URL}/api/matches/live`),
+                    fetch(`${API_BASE_URL}/api/matches/upcoming`)
                 ]);
 
                 if (!liveRes.ok || !upcomingRes.ok) {
