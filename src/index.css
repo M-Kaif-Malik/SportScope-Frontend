@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  -color-border: #17120e;
+  --color-border: #17120e;
   --color-surface-variant: #e8e1dd;
   --color-surface-dim: #e0d9d4;
   --color-on-tertiary-container: #7d93a1;
