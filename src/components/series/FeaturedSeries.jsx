@@ -93,7 +93,7 @@ export const FeaturedSeries = () => {
                     // Skeleton Loading
                     [1, 2, 3].map(i => (
                         <div key={i} className="snap-start flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)]">
-                            <div className="relative rounded-xl overflow-hidden flex-shrink-0 w-[300px] md:w-[350px] aspect-[4/3] bg-[var(--color-surface-variant)] animate-pulse"></div>
+                            <div className="relative rounded-xl overflow-hidden flex-shrink-0 w-full aspect-[4/3] bg-[var(--color-surface-variant)] animate-pulse"></div>
                         </div>
                     ))
                 ) : (

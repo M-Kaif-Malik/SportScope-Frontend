@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { MaterialIcon } from '../ui/MaterialIcon';
 
 import logoLight from '../../assets/images/logo.png';
@@ -9,6 +9,9 @@ export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [expandedMenu, setExpandedMenu] = useState('Cricket');
     const [isDark, setIsDark] = useState(false);
+    const location = useLocation();
+
+    const isTennis = location.pathname.startsWith('/tennis');
 
     useEffect(() => {
         // Check local storage or system preference on mount
@@ -56,15 +59,18 @@ export const Header = () => {
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-6">
-                        {["Cricket", "Football", "Basketball"].map((item, i) => (
-                            <a
-                                key={item}
-                                href="#"
-                                className={`text-[12px] font-semibold tracking-[0.08em] uppercase pb-1 no-underline font-inter ${i === 0 ? 'text-[var(--color-secondary)] border-b-2 border-[var(--color-secondary)]' : 'text-[var(--color-on-surface-variant)] border-none'}`}
-                            >
-                                {item}
-                            </a>
-                        ))}
+                        <Link
+                            to="/"
+                            className={`text-[12px] font-semibold tracking-[0.08em] uppercase pb-1 no-underline font-inter ${!isTennis ? 'text-[var(--color-secondary)] border-b-2 border-[var(--color-secondary)]' : 'text-[var(--color-on-surface-variant)] border-none'}`}
+                        >
+                            Cricket
+                        </Link>
+                        <Link
+                            to="/tennis"
+                            className={`text-[12px] font-semibold tracking-[0.08em] uppercase pb-1 no-underline font-inter ${isTennis ? 'text-[var(--color-secondary)] border-b-2 border-[var(--color-secondary)]' : 'text-[var(--color-on-surface-variant)] border-none'}`}
+                        >
+                            Tennis
+                        </Link>
                     </nav>
                 </div>
 
@@ -87,7 +93,7 @@ export const Header = () => {
 
             {menuOpen && (
                 <div className="md:hidden px-4 pb-4 bg-[var(--color-surface)] border-t border-[var(--color-outline-variant)]">
-                    {["Cricket", "Football", "Basketball"].map((item) => (
+                    {["Cricket", "Tennis"].map((item) => (
                         <div key={item} className="border-b border-[var(--color-outline-variant)]/20 last:border-0">
                             <button
                                 onClick={() => toggleMenu(item)}
@@ -98,7 +104,7 @@ export const Header = () => {
                             </button>
 
                             {expandedMenu === item && (
-                                <div className="pb-4 pl-4 flex flex-col gap-4 border-l-2 border-[var(--color-secondary)] ml-2">
+                                <div className="pb-4 pl-4 flex flex-col gap-4 border-l-2 border-[var(--color-border)] ml-2">
                                     {item === "Cricket" ? (
                                         <>
                                             <Link to="/" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Home</Link>
@@ -107,9 +113,15 @@ export const Header = () => {
                                             <Link to="/previous-matches" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Previous Matches</Link>
                                             <Link to="/players" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Players</Link>
                                         </>
-                                    ) : (
-                                        <span className="text-[12px] font-medium text-[var(--color-outline)] italic">Coming Soon...</span>
-                                    )}
+                                    ) : item === "Tennis" ? (
+                                        <>
+                                            <Link to="/tennis" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Home</Link>
+                                            <Link to="/tennis/matches" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Matches</Link>
+                                            <Link to="/tennis/tournaments" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Tournaments</Link>
+                                            <Link to="/tennis/players" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Players</Link>
+                                            <Link to="/tennis/rankings" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Rankings</Link>
+                                        </>
+                                    ) : null}
                                 </div>
                             )}
                         </div>

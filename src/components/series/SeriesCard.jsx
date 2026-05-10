@@ -12,7 +12,7 @@ export const SeriesCard = ({ id, label, title, img, teamImages }) => {
 
     return (
         <div 
-            className="relative rounded-xl overflow-hidden flex-shrink-0 group w-[300px] md:w-[350px] aspect-[4/3] cursor-pointer"
+            className="relative rounded-xl overflow-hidden flex-shrink-0 group w-full aspect-[4/3] cursor-pointer"
             onClick={handleClick}
         >
             {teamImages && teamImages.length >= 2 ? (

@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 @theme {
+  -color-border: #17120e;
   --color-surface-variant: #e8e1dd;
   --color-surface-dim: #e0d9d4;
   --color-on-tertiary-container: #7d93a1;
@@ -67,7 +68,7 @@
   }
 
   .dark {
-    --color-surface-variant: #e8e1dd;
+    --color-border: #e0d9d4 --color-surface-variant: #e8e1dd;
     --color-surface-dim: #17120e;
     --color-on-tertiary-container: #a0cce8;
     --color-secondary-fixed-dim: #ffb786;
