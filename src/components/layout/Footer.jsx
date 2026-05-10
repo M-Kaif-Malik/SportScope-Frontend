@@ -11,19 +11,8 @@ export const Footer = () => (
                     Analytical rigor. Editorial warmth.
                 </p>
             </div>
-            <div className="flex flex-wrap justify-center gap-6">
-                {["About", "Privacy Policy", "Terms of Service", "Contact"].map((link) => (
-                    <a
-                        key={link}
-                        href="#"
-                        className="text-[12px] font-semibold tracking-[0.08em] uppercase text-[var(--color-on-surface-variant)] no-underline font-inter hover:text-[var(--color-primary)] transition-colors"
-                    >
-                        {link}
-                    </a>
-                ))}
-            </div>
             <div className="text-[16px] text-[var(--color-on-surface)] opacity-60 font-manrope">
-                © 2024 SportsScope. All rights reserved.
+                © 2026 SportsScope. All rights reserved.
             </div>
         </div>
     </footer>

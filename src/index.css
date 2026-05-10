@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -41,7 +42,7 @@
   --color-surface-container-low: #faf2ee;
   --color-surface-container-lowest: #ffffff;
   --color-on-secondary-container: #773b04;
-  --color-on-primary: #ffffff;
+  --color-on-primary: #fff8f4;
   --color-surface-tint: #74593e;
   --color-surface-container-highest: #e8e1dd;
   --color-surface-bright: #fff8f4;
@@ -49,7 +50,7 @@
 
   --font-manrope: "Manrope", sans-serif;
   --font-inter: "Inter", sans-serif;
-  
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -57,8 +58,6 @@
 }
 
 @layer base {
-  @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
-
   body {
     background-color: var(--color-surface);
     color: var(--color-on-surface);
@@ -68,12 +67,12 @@
   }
 
   .dark {
-    --color-surface-variant: #50443a;
+    --color-surface-variant: #e8e1dd;
     --color-surface-dim: #17120e;
     --color-on-tertiary-container: #a0cce8;
     --color-secondary-fixed-dim: #ffb786;
     --color-primary-fixed-dim: #e3c09f;
-    --color-on-error-container: #ffb4ab;
+    --color-on-error-container: #fc3822;
     --color-on-background: #efeae5;
     --color-on-tertiary: #00334c;
     --color-tertiary-fixed-dim: #b3cad9;
@@ -98,7 +97,7 @@
     --color-on-primary-container: #ffdcbc;
     --color-primary: #ffdcbc;
     --color-error: #ffb4ab;
-    --color-secondary-container: #703700;
+    --color-secondary-container: #fea76b;
     --color-tertiary-container: #004b6f;
     --color-tertiary-fixed: #cfe6f6;
     --color-on-tertiary-fixed: #061e29;
@@ -107,21 +106,32 @@
     --color-tertiary: #a0cce8;
     --color-surface-container-low: #1d1712;
     --color-surface-container-lowest: #120e0a;
-    --color-on-secondary-container: #ffb786;
-    --color-on-primary: #472900;
+    --color-on-secondary-container: #773b04;
+    --color-on-primary: #fff8f4;
     --color-surface-tint: #ffdcbc;
     --color-surface-container-highest: #372b22;
-    --color-surface-bright: #3c322a;
+    --color-surface-bright: #fff8f4;
     --color-on-surface-variant: #d6c3b6;
   }
 
   .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    font-family: 'Material Symbols Outlined';
+    font-family: "Material Symbols Outlined";
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
   }
 }

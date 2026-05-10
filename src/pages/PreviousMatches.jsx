@@ -103,7 +103,7 @@ export default function PreviousMatches() {
                             <label className="font-inter text-[12px] font-semibold tracking-[0.08em] uppercase text-[var(--color-on-surface-variant)] block mb-2">DATE</label>
                             <div className="flex items-center gap-2">
                                 <input
-                                    className="w-full bg-[var(--color-surface-container-lowest)] border-b border-[var(--color-outline-variant)] focus:border-[var(--color-primary)] px-2 py-2 outline-none font-inter text-[14px] transition-colors"
+                                    className="w-full bg-[var(--color-surface-container-lowest)] border-b border-[var(--color-outline-variant)] focus:border-[var(--color-primary)] px-2 py-2 outline-none font-inter text-[14px] text-[var(--color-on-surface)] transition-colors [color-scheme:--color-on-surface] "
                                     type="date"
                                     value={dateRange}
                                     onChange={(e) => setDateRange(e.target.value)}
@@ -145,66 +145,66 @@ export default function PreviousMatches() {
                         ) : (
                             <>
                                 {filteredMatches.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map(match => {
-                                const t1Score = match.score && match.score[0] ? `${match.score[0].runs}/${match.score[0].wickets}` : '---';
-                                const t2Score = match.score && match.score[1] ? `${match.score[1].runs}/${match.score[1].wickets}` : '---';
+                                    const t1Score = match.score && match.score[0] ? `${match.score[0].runs}/${match.score[0].wickets}` : '---';
+                                    const t2Score = match.score && match.score[1] ? `${match.score[1].runs}/${match.score[1].wickets}` : '---';
 
-                                return (
-                                    <div key={match._id} className="bg-[var(--color-surface-container-lowest)] rounded-xl border border-[var(--color-primary)]/10 overflow-hidden shadow-[0_4px_20px_-2px_rgba(56,36,13,0.08)] group hover:border-[var(--color-secondary)]/30 transition-all cursor-pointer">
-                                        <div className="flex flex-col md:flex-row">
-                                            <div className="md:w-48 h-32 md:h-auto relative overflow-hidden bg-gradient-to-br from-[var(--color-surface-container)] to-[var(--color-surface-container-high)] flex items-center justify-center min-h-[128px]">
-                                                {/* Team A Logo - Top Left Blurred */}
-                                                {match.teamA?.logo ? (
-                                                    <img src={match.teamA.logo} alt={match.teamA.name} className="absolute -top-4 -left-4 w-24 h-24 object-contain opacity-40 blur-md mix-blend-multiply scale-110" />
-                                                ) : null}
+                                    return (
+                                        <div key={match._id} className="bg-[var(--color-surface-container-lowest)] rounded-xl border border-[var(--color-primary)]/10 overflow-hidden shadow-[0_4px_20px_-2px_rgba(56,36,13,0.08)] group hover:border-[var(--color-secondary)]/30 transition-all cursor-pointer">
+                                            <div className="flex flex-col md:flex-row">
+                                                <div className="md:w-48 h-32 md:h-auto relative overflow-hidden bg-gradient-to-br from-[var(--color-surface-container)] to-[var(--color-surface-container-high)] flex items-center justify-center min-h-[128px]">
+                                                    {/* Team A Logo - Top Left Blurred */}
+                                                    {match.teamA?.logo ? (
+                                                        <img src={match.teamA.logo} alt={match.teamA.name} className="absolute -top-4 -left-4 w-24 h-24 object-contain opacity-40 blur-md mix-blend-multiply scale-110" />
+                                                    ) : null}
 
-                                                {/* Team B Logo - Bottom Right Blurred */}
-                                                {match.teamB?.logo ? (
-                                                    <img src={match.teamB.logo} alt={match.teamB.name} className="absolute -bottom-4 -right-4 w-24 h-24 object-contain opacity-40 blur-md mix-blend-multiply scale-110" />
-                                                ) : null}
+                                                    {/* Team B Logo - Bottom Right Blurred */}
+                                                    {match.teamB?.logo ? (
+                                                        <img src={match.teamB.logo} alt={match.teamB.name} className="absolute -bottom-4 -right-4 w-24 h-24 object-contain opacity-40 blur-md mix-blend-multiply scale-110" />
+                                                    ) : null}
 
-                                                {/* Inner Shadow / Vignette for better merging */}
-                                                <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(33,16,0,0.05)] pointer-events-none"></div>
+                                                    {/* Inner Shadow / Vignette for better merging */}
+                                                    <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(33,16,0,0.05)] pointer-events-none"></div>
 
-                                                <div className="absolute top-2 left-2 z-20">
-                                                    <span className="bg-[var(--color-primary)] text-white text-[10px] font-inter font-semibold tracking-[0.08em] uppercase px-2 py-1 rounded shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-                                                        {match.format || 'CRICKET'}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div className="flex-1 p-6">
-                                                <div className="flex justify-between items-start mb-2">
-                                                    <span className="font-inter text-[14px] font-medium text-[var(--color-on-surface-variant)]">
-                                                        {new Date(match.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} • {match.venue || 'Unknown Venue'}
-                                                    </span>
-                                                    <MaterialIcon name="history" className="text-[var(--color-secondary)]" />
-                                                </div>
-                                                <div className="flex items-center justify-between">
-                                                    <div className="flex flex-col gap-1">
-                                                        <div className="flex items-center gap-2">
-                                                            {match.teamA?.logo && <img src={match.teamA.logo} alt={match.teamA.name} className="w-6 h-6 rounded-full object-cover" />}
-                                                            <span className="font-manrope text-[24px] font-semibold text-[var(--color-primary)]">{match.teamA?.name || 'Team 1'}</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-2">
-                                                            {match.teamB?.logo && <img src={match.teamB.logo} alt={match.teamB.name} className="w-6 h-6 rounded-full object-cover" />}
-                                                            <span className="font-manrope text-[24px] font-semibold text-[var(--color-primary)]">{match.teamB?.name || 'Team 2'}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="flex flex-col items-end gap-1">
-                                                        <span className="font-manrope text-[32px] font-bold tracking-[-0.01em] text-[var(--color-secondary)]">{t1Score}</span>
-                                                        <span className="font-manrope text-[32px] font-bold tracking-[-0.01em] text-[var(--color-on-surface-variant)]/60">{t2Score}</span>
+                                                    <div className="absolute top-2 left-2 z-20">
+                                                        <span className="bg-[var(--color-primary)] text-white text-[10px] font-inter font-semibold tracking-[0.08em] uppercase px-2 py-1 rounded shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+                                                            {match.format || 'CRICKET'}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div className="mt-4 pt-4 border-t border-[var(--color-outline-variant)]/20">
-                                                    <span className="font-inter text-[12px] font-medium text-[var(--color-on-surface)]">{match.status || 'Match Completed'}</span>
+                                                <div className="flex-1 p-6">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <span className="font-inter text-[14px] font-medium text-[var(--color-on-surface-variant)]">
+                                                            {new Date(match.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} • {match.venue || 'Unknown Venue'}
+                                                        </span>
+                                                        <MaterialIcon name="history" className="text-[var(--color-secondary)]" />
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex flex-col gap-1">
+                                                            <div className="flex items-center gap-2">
+                                                                {match.teamA?.logo && <img src={match.teamA.logo} alt={match.teamA.name} className="w-6 h-6 rounded-full object-cover" />}
+                                                                <span className="font-manrope text-[24px] font-semibold text-[var(--color-primary)]">{match.teamA?.name || 'Team 1'}</span>
+                                                            </div>
+                                                            <div className="flex items-center gap-2">
+                                                                {match.teamB?.logo && <img src={match.teamB.logo} alt={match.teamB.name} className="w-6 h-6 rounded-full object-cover" />}
+                                                                <span className="font-manrope text-[24px] font-semibold text-[var(--color-primary)]">{match.teamB?.name || 'Team 2'}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex flex-col items-end gap-1">
+                                                            <span className="font-manrope text-[32px] font-bold tracking-[-0.01em] text-[var(--color-secondary)]">{t1Score}</span>
+                                                            <span className="font-manrope text-[32px] font-bold tracking-[-0.01em] text-[var(--color-on-surface-variant)]/60">{t2Score}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-4 pt-4 border-t border-[var(--color-outline-variant)]/20">
+                                                        <span className="font-inter text-[12px] font-medium text-[var(--color-on-surface)]">{match.status || 'Match Completed'}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
+                                    );
                                 })}
                                 {Math.ceil(filteredMatches.length / ITEMS_PER_PAGE) > 1 && (
                                     <nav className="mt-12 flex justify-center items-center gap-2">
-                                        <button 
+                                        <button
                                             onClick={() => {
                                                 setCurrentPage(prev => Math.max(prev - 1, 1));
                                                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -214,25 +214,24 @@ export default function PreviousMatches() {
                                         >
                                             <MaterialIcon name="arrow_back" />
                                         </button>
-                                        
+
                                         {Array.from({ length: Math.ceil(filteredMatches.length / ITEMS_PER_PAGE) }, (_, i) => i + 1).map(page => (
-                                            <button 
+                                            <button
                                                 key={page}
                                                 onClick={() => {
                                                     setCurrentPage(page);
                                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                                 }}
-                                                className={`w-10 h-10 rounded-full font-inter text-[12px] font-semibold tracking-[0.08em] border-none cursor-pointer transition-colors ${
-                                                    currentPage === page 
-                                                        ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]' 
-                                                        : 'bg-transparent text-[var(--color-on-surface)] hover:bg-[var(--color-surface-container-high)]'
-                                                }`}
+                                                className={`w-10 h-10 rounded-full font-inter text-[12px] font-semibold tracking-[0.08em] border-none cursor-pointer transition-colors ${currentPage === page
+                                                    ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+                                                    : 'bg-transparent text-[var(--color-on-surface)] hover:bg-[var(--color-surface-container-high)]'
+                                                    }`}
                                             >
                                                 {page}
                                             </button>
                                         ))}
-                                        
-                                        <button 
+
+                                        <button
                                             onClick={() => {
                                                 setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredMatches.length / ITEMS_PER_PAGE)));
                                                 window.scrollTo({ top: 0, behavior: 'smooth' });
