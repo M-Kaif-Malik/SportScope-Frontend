@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
 import { SecondaryNavbar } from '../components/layout/SecondaryNavbar';
 import { Footer } from '../components/layout/Footer';
 import { MaterialIcon } from '../components/ui/MaterialIcon';
 
 export default function SeriesPage() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const initialSeriesId = queryParams.get('seriesId');
+
     const [seriesList, setSeriesList] = useState([]);
     const [activeSeries, setActiveSeries] = useState(null);
     const [formatFilter, setFormatFilter] = useState('all');
@@ -35,13 +40,16 @@ export default function SeriesPage() {
                         type: 'International',
                         format: formats.length > 1 ? 'Multi-format' : (s.t20 > 0 ? 'T20' : s.odi > 0 ? 'ODI' : s.test > 0 ? 'Test' : 'Unknown'),
                         image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=2000',
-                        status: new Date(s.startDate) <= new Date() ? 'Live' : 'Upcoming',
+                        status: new Date(s.startDate) <= new Date() ? 'Ongoing' : 'Upcoming',
                         matches: [] // To prevent crash until we connect the series details API
                     };
                 });
 
                 setSeriesList(mappedSeries);
-                if (mappedSeries.length > 0) {
+                if (initialSeriesId) {
+                    const found = mappedSeries.find(s => s.id === initialSeriesId);
+                    setActiveSeries(found || (mappedSeries.length > 0 ? mappedSeries[0] : null));
+                } else if (mappedSeries.length > 0) {
                     setActiveSeries(mappedSeries[0]);
                 } else {
                     setActiveSeries(null);
@@ -54,7 +62,7 @@ export default function SeriesPage() {
         };
 
         fetchSeries();
-    }, [formatFilter, statusFilter]);
+    }, [formatFilter, statusFilter, initialSeriesId]);
 
     useEffect(() => {
         const fetchSeriesInfo = async () => {
