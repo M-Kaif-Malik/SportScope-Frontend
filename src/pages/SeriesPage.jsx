@@ -326,7 +326,7 @@ export default function SeriesPage() {
                                                     <h4 className="font-manrope text-[20px] font-semibold text-[var(--color-primary)] mb-1">{series.title}</h4>
                                                     <p className="text-[var(--color-on-surface-variant)] font-manrope text-[14px] leading-[1.6] mb-4">{series.matchSummary}</p>
                                                     <div className="flex gap-2">
-                                                        <span className="bg-[var(--color-surface-variant)] px-2 py-1 rounded text-[10px] font-inter font-semibold tracking-[0.08em] uppercase">{series.format}</span>
+                                                        <span className="bg-[var(--color-surface-variant)] text-black px-2 py-1 rounded text-[10px] font-inter font-semibold tracking-[0.08em] uppercase">{series.format}</span>
                                                     </div>
                                                 </div>
                                             ))}

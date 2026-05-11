@@ -20,7 +20,7 @@ const MatchCarousel = forwardRef(({ matches, onCardClick }, ref) => {
                 {matches.map((match) => (
                     <div 
                         key={match.id} 
-                        className="snap-start flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] h-[300px] flex"
+                        className="snap-start flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] min-h-[300px] flex"
                     >
                         <MatchCard match={match} onClick={() => onCardClick && onCardClick(match)} />
                     </div>
