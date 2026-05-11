@@ -81,9 +81,9 @@ export const FeaturedSeries = () => {
             <div 
                 ref={scrollRef}
                 className="flex gap-6 overflow-x-auto px-4 md:px-12 pb-6 snap-x snap-mandatory max-w-[1280px] mx-auto"
-                style={{ scrollbarWidth: "none" /* Firefox */ }}
+                style={{ scrollbarWidth: "none" }}
             >
-                {/* Hide scrollbar for Chrome, Safari and Opera */}
+
                 <style>{`
                     .overflow-x-auto::-webkit-scrollbar {
                         display: none;

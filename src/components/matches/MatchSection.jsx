@@ -6,7 +6,7 @@ import { IconButton } from '../ui/IconButton';
 const MatchCarousel = forwardRef(({ matches, onCardClick }, ref) => {
     if (!matches || matches.length === 0) return (
         <div className="flex justify-center py-10">
-            <span className="text-[var(--color-on-surface-variant)] font-inter italic">No matches found for this filter.</span>
+            <span className="text-[var(--color-on-surface-variant)] font-inter italic">No matches found...</span>
         </div>
     );
 
@@ -39,6 +39,7 @@ export const MatchSection = () => {
 
     const scrollRef = useRef(null);
 
+    // Scroll function for carousel
     const scroll = (direction) => {
         if (scrollRef.current) {
             const scrollAmount = scrollRef.current.clientWidth / 3 || 400; 

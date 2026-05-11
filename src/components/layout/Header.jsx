@@ -9,12 +9,12 @@ export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [expandedMenu, setExpandedMenu] = useState('Cricket');
     const [isDark, setIsDark] = useState(false);
-    const location = useLocation();
+    const location = useLocation(); //gets the current URL/location object from React Router
 
     const isTennis = location.pathname.startsWith('/tennis');
 
+    // Sets initial theme based on saved preference or system dark mode on component mount
     useEffect(() => {
-        // Check local storage or system preference on mount
         const storedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -36,6 +36,7 @@ export const Header = () => {
         }
     };
 
+    // Toggles the expanded state of the mobile menu sections
     const toggleMenu = (item) => {
         setExpandedMenu(expandedMenu === item ? null : item);
     };

@@ -1,16 +1,69 @@
-# React + Vite
+# Sports Analytics Web App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend repository for the Sports Analytics Web App, built with React and Vite. It provides a comprehensive, responsive, and interactive user interface for displaying sports analytics, currently focusing on Cricket and Tennis.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Cricket Module:** View live, recent, and upcoming cricket matches, player profiles, and detailed series information.
+- **Tennis Module:** Explore tennis fixtures (by date, range, or tournament), player profiles and stats, tournament calendars, and rankings (singles, doubles, race).
+- **Modern UI:** Built with Tailwind CSS for a responsive, sleek, and premium user experience.
+- **Client-Side Routing:** Utilizes React Router for seamless navigation between different sports modules and pages.
+- **Dynamic Data Visualization:** Uses data fetched from the backend API to display real-time analytics.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework:** React 19
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS 4
+- **Routing:** React Router DOM
+- **HTTP Client:** Axios
+- **Icons:** Lucide React
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository and navigate to the frontend directory:
+   ```bash
+   cd f2
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+The application will be running on `http://localhost:5173` (or the port specified by Vite).
+
+### Building for Production
+
+To build the app for production, run:
+```bash
+npm run build
+```
+This will generate optimized static assets in the `dist` folder.
+
+To preview the production build locally:
+```bash
+npm run preview
+```
+
+## Project Structure
+
+- `src/components`: Reusable UI components (like the `SeriesCard`, headers, layouts).
+- `src/pages`: Top-level page components for different routes.
+- `src/assets`: Static assets like images and global CSS.
+
+## License
+
+This project is licensed under the MIT License.
