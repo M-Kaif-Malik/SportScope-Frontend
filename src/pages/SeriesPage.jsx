@@ -7,7 +7,8 @@ import { Footer } from '../components/layout/Footer';
 import { MaterialIcon } from '../components/ui/MaterialIcon';
 
 export default function SeriesPage() {
-    const location = useLocation();
+    // page can automatically open/select a specific series based on the URL
+    const location = useLocation(); // To read query params for initial series selection
     const queryParams = new URLSearchParams(location.search);
     const initialSeriesId = queryParams.get('seriesId');
 
@@ -107,6 +108,7 @@ export default function SeriesPage() {
         fetchSeriesInfo();
     }, [activeSeries?.id]);
 
+    // reset page to 0 whenever filters or active series changes
     useEffect(() => {
         setOtherSeriesPage(0);
     }, [formatFilter, statusFilter, activeSeries]);
@@ -116,6 +118,7 @@ export default function SeriesPage() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    // For pagination of other series (4 per page)
     const otherSeries = activeSeries ? seriesList.filter(s => s.id !== activeSeries.id) : [];
     const paginatedOtherSeries = otherSeries.slice(otherSeriesPage * 4, (otherSeriesPage + 1) * 4);
 
@@ -146,7 +149,7 @@ export default function SeriesPage() {
 
                 <div className="flex flex-col gap-6">
 
-                    {/* Sidebar: Navigation & Filters */}
+                    {/*Navigation & Filters */}
                     <div className="flex flex-wrap gap-2 items-center justify-center">
                         {/* Match Type */}
                         <div className="flex flex-wrap gap-2">

@@ -7,6 +7,7 @@ import { MaterialIcon } from '../components/ui/MaterialIcon';
 import { fetchPlayers, fetchFilters } from '../services/playerApi';
 
 // Custom debounce hook
+// 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
     useEffect(() => {
@@ -19,7 +20,7 @@ function useDebounce(value, delay) {
 }
 
 export default function PlayersDirectory() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // for navigating to player profiles
 
     // State
     const [players, setPlayers] = useState([]);
@@ -32,6 +33,7 @@ export default function PlayersDirectory() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
+    // Filters state
     const [filters, setFilters] = useState({
         country: '',
         gender: '',
@@ -40,14 +42,17 @@ export default function PlayersDirectory() {
         position: ''
     });
 
+    // This will populate the dropdowns for country
     useEffect(() => {
         fetchFilters().then(data => setFiltersMetadata(data));
     }, []);
 
+    // Whenever search term, filters, or page changes, we fetch the players again
     useEffect(() => {
         loadPlayers();
     }, [debouncedSearch, filters, page]);
 
+    // Function to fetch players based on current search and filters
     const loadPlayers = async () => {
         setLoading(true);
         try {
@@ -66,6 +71,7 @@ export default function PlayersDirectory() {
         }
     };
 
+    // Handler for when any filter dropdown changes
     const handleFilterChange = (key, value) => {
         setFilters(prev => ({ ...prev, [key]: value }));
         setPage(1);
@@ -163,8 +169,9 @@ export default function PlayersDirectory() {
                         </div>
                     </div>
 
-                    {/* Bento Grid of Players */}
+                    {/*Grid of Players */}
                     {loading ? (
+                        // Show loading skeletons
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
                                 <div key={i} className="animate-pulse">
@@ -221,7 +228,7 @@ export default function PlayersDirectory() {
                         </div>
                     )}
 
-                    {/* Pagination */}
+                    {/* Page controls */}
                     {totalPages > 1 && !loading && (
                         <div className="mt-12 flex justify-center items-center gap-4">
                             <button

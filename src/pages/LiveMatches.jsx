@@ -21,10 +21,12 @@ export default function LiveMatches() {
     
     const location = useLocation();
 
+    // Reset to first page when filters change
     useEffect(() => {
         setCurrentPage(1);
     }, [searchTerm, formatFilter, statusFilter]);
 
+    // Handle deep linking to specific match
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const matchId = queryParams.get('matchId');
@@ -40,6 +42,7 @@ export default function LiveMatches() {
         }
     }, [location.search, loading]);
 
+    // Fetch live and upcoming matches
     useEffect(() => {
         const fetchMatches = async () => {
             setLoading(true);
@@ -377,6 +380,7 @@ export default function LiveMatches() {
                     )}
                 </section>
 
+                // Page Change Controls
                 {Math.ceil(filteredMatches.length / ITEMS_PER_PAGE) > 1 && (
                     <nav className="mt-12 flex justify-center items-center gap-2">
                         <button 

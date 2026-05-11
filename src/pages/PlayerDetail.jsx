@@ -7,11 +7,12 @@ import { MaterialIcon } from '../components/ui/MaterialIcon';
 import { fetchPlayerById } from '../services/playerApi';
 
 export default function PlayerDetail() {
-    const { playerId } = useParams();
+    const { playerId } = useParams(); // Get playerId from URL params
     const navigate = useNavigate();
     const [player, setPlayer] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Fetch player details on component mount and when playerId changes
     useEffect(() => {
         window.scrollTo(0, 0);
         setLoading(true);
