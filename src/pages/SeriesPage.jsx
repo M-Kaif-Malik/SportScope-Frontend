@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from "../config/api";
+
 import { useLocation } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
 import { SecondaryNavbar } from '../components/layout/SecondaryNavbar';
@@ -24,7 +26,7 @@ export default function SeriesPage() {
         const fetchSeries = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5000/api/series/upcoming?format=${formatFilter}&status=${statusFilter}`);
+const response = await axios.get(`${API_BASE_URL}/api/series/upcoming?format=${formatFilter}&status=${statusFilter}`);
 
                 const mappedSeries = response.data.series.map(s => {
                     const formats = [];
@@ -72,7 +74,7 @@ export default function SeriesPage() {
             if (activeSeries.matches && activeSeries.matches.length > 0) return;
 
             try {
-                const response = await axios.get(`http://localhost:5000/api/series/${activeSeries.id}`);
+const response = await axios.get(`${API_BASE_URL}/api/series/${activeSeries.id}`);
                 const seriesData = response.data.series;
 
                 if (seriesData && seriesData.matchList) {

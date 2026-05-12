@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MatchCard } from './MatchCard';
 import { IconButton } from '../ui/IconButton';
+import API_BASE_URL from "../../config/api";
+
 
 const MatchCarousel = forwardRef(({ matches, onCardClick }, ref) => {
     if (!matches || matches.length === 0) return (
@@ -62,9 +64,9 @@ export const MatchSection = () => {
             setLoading(true);
             try {
                 const [liveRes, upcomingRes, savedRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/matches/live').then(r => r.ok ? r.json() : { matches: [] }),
-                    fetch('http://localhost:5000/api/matches/upcoming').then(r => r.ok ? r.json() : { matches: [] }),
-                    fetch('http://localhost:5000/api/matches/saved').then(r => r.ok ? r.json() : { matches: [] })
+                    fetch(`${API_BASE_URL}/api/matches/live`).then(r => r.ok ? r.json() : { matches: [] }),
+                    fetch(`${API_BASE_URL}/api/matches/upcoming`).then(r => r.ok ? r.json() : { matches: [] }),
+                    fetch(`${API_BASE_URL}/api/matches/saved`).then(r => r.ok ? r.json() : { matches: [] })
                 ]);
 
                 let combined = [];

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import API_BASE_URL from "../../config/api";
+
 import { PlayerCard } from './PlayerCard';
 
 export const FeaturedPlayers = () => {
@@ -11,7 +13,7 @@ export const FeaturedPlayers = () => {
             setLoading(true);
             try {
                 // Fetch elite players defined in the DB (f_players collection)
-                const res = await fetch('http://localhost:5000/api/players/featured');
+const res = await fetch(`${API_BASE_URL}/api/players/featured`);
                 const data = await res.json();
 
                 let fetchedPlayers = [];
@@ -26,7 +28,7 @@ export const FeaturedPlayers = () => {
 
                 // If the DB doesn't have elite players yet, fetch a default list of 7 players
                 if (fetchedPlayers.length === 0) {
-                    const fallbackRes = await fetch('http://localhost:5000/api/players?limit=7');
+const fallbackRes = await fetch(`${API_BASE_URL}/api/players?limit=7`);
                     const fallbackData = await fallbackRes.json();
                     if (fallbackData.players) {
                         fetchedPlayers = fallbackData.players.map(p => ({
