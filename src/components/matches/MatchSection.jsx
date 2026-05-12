@@ -8,7 +8,7 @@ import API_BASE_URL from "../../config/api";
 const MatchCarousel = forwardRef(({ matches, onCardClick }, ref) => {
     if (!matches || matches.length === 0) return (
         <div className="flex justify-center py-10">
-            <span className="text-[var(--color-on-surface-variant)] font-inter italic">No matches found for this filter.</span>
+            <span className="text-[var(--color-on-surface-variant)] font-inter italic">No matches found...</span>
         </div>
     );
 
@@ -22,7 +22,7 @@ const MatchCarousel = forwardRef(({ matches, onCardClick }, ref) => {
                 {matches.map((match) => (
                     <div 
                         key={match.id} 
-                        className="snap-start flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] h-[300px] flex"
+                        className="snap-start flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] min-h-[300px] flex"
                     >
                         <MatchCard match={match} onClick={() => onCardClick && onCardClick(match)} />
                     </div>
@@ -41,6 +41,7 @@ export const MatchSection = () => {
 
     const scrollRef = useRef(null);
 
+    // Scroll function for carousel
     const scroll = (direction) => {
         if (scrollRef.current) {
             const scrollAmount = scrollRef.current.clientWidth / 3 || 400; 

@@ -7,20 +7,26 @@ import logoDark from '../../assets/images/logo-b2.png';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [expandedMenu, setExpandedMenu] = useState('Cricket');
-    const [isDark, setIsDark] = useState(false);
-    const location = useLocation();
-
+    const location = useLocation(); //gets the current URL/location object from React Router
     const isTennis = location.pathname.startsWith('/tennis');
+    
+    const [expandedMenu, setExpandedMenu] = useState(isTennis ? 'Tennis' : 'Cricket');
+    const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
-        // Check local storage or system preference on mount
-        const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setExpandedMenu(isTennis ? 'Tennis' : 'Cricket');
+    }, [isTennis]);
 
-        if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+    // Sets initial theme based on saved preference or system dark mode on component mount
+    useEffect(() => {
+        const storedTheme = localStorage.getItem('theme');
+
+        if (storedTheme === 'dark') {
             document.documentElement.classList.add('dark');
             setIsDark(true);
+        } else {
+            document.documentElement.classList.remove('dark');
+            setIsDark(false);
         }
     }, []);
 
@@ -36,6 +42,7 @@ export const Header = () => {
         }
     };
 
+    // Toggles the expanded state of the mobile menu sections
     const toggleMenu = (item) => {
         setExpandedMenu(expandedMenu === item ? null : item);
     };
@@ -118,7 +125,6 @@ export const Header = () => {
                                             <Link to="/tennis" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Home</Link>
                                             <Link to="/tennis/matches" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Matches</Link>
                                             <Link to="/tennis/tournaments" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Tournaments</Link>
-                                            <Link to="/tennis/players" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Players</Link>
                                             <Link to="/tennis/rankings" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Rankings</Link>
                                         </>
                                     ) : null}

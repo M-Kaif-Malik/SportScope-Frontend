@@ -20,12 +20,6 @@ export default function SportsScope() {
                 <FeaturedPlayers />
             </main>
             <Footer />
-            {/* FAB for mobile */}
-            <button
-                className="md:hidden fixed bottom-6 right-6 flex items-center justify-center shadow-lg hover:scale-110 transition-transform w-14 h-14 rounded-full bg-[var(--color-secondary-container)] text-[var(--color-on-secondary-container)] border-none cursor-pointer z-50"
-            >
-                <MaterialIcon name="search" />
-            </button>
         </div>
     );
 }
