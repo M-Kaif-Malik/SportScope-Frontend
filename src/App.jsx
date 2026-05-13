@@ -6,6 +6,7 @@ import SeriesPage from './pages/SeriesPage';
 import PlayersDirectory from './pages/PlayersDirectory';
 import PlayerDetail from './pages/PlayerDetail';
 import SportsScope from './pages/Home';
+import CricketAnalytics from './pages/CricketAnalytics';
 
 // Tennis Pages
 import TennisHome from './pages/tennis/TennisHome';
@@ -13,6 +14,7 @@ import TennisMatches from './pages/tennis/TennisMatches';
 import TennisTournaments from './pages/tennis/TennisTournaments';
 import TennisRankings from './pages/tennis/TennisRankings';
 import TennisPlayers from './pages/tennis/TennisPlayers';
+import TennisAnalytics from './pages/tennis/TennisAnalytics';
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path="/previous-matches" element={<PreviousMatches />} />
         <Route path="/players" element={<PlayersDirectory />} />
         <Route path="/player/:playerId" element={<PlayerDetail />} />
+        <Route path="/analytics" element={<CricketAnalytics />} />
 
         {/* Tennis Routes */}
         <Route path="/tennis" element={<TennisHome />} />
@@ -31,6 +34,7 @@ function App() {
         <Route path="/tennis/tournaments" element={<TennisTournaments />} />
         <Route path="/tennis/rankings" element={<TennisRankings />} />
         <Route path="/tennis/players" element={<TennisPlayers />} />
+        <Route path="/tennis/analytics" element={<TennisAnalytics />} />
       </Routes>
     </BrowserRouter>
   );

@@ -9,6 +9,7 @@ export const SecondaryNavbar = () => {
         { label: 'Series', path: '/series' },
         { label: 'Previous Matches', path: '/previous-matches' },
         { label: 'Players', path: '/players' },
+        { label: 'Analytics', path: '/analytics' },
     ];
 
     return (

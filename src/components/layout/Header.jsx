@@ -119,6 +119,7 @@ export const Header = () => {
                                             <Link to="/series" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Series</Link>
                                             <Link to="/previous-matches" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Previous Matches</Link>
                                             <Link to="/players" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Players</Link>
+                                            <Link to="/analytics" onClick={() => setMenuOpen(false)} className="text-[12px] font-semibold tracking-wide text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] no-underline uppercase transition-colors">Analytics</Link>
                                         </>
                                     ) : item === "Tennis" ? (
                                         <>
