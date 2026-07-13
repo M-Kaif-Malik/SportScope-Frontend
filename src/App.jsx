@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LiveMatches from './pages/LiveMatches';
 import PreviousMatches from './pages/PreviousMatches';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/tennis/players" element={<TennisPlayers />} />
         <Route path="/tennis/analytics" element={<TennisAnalytics />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
